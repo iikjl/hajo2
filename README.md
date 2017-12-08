@@ -7,10 +7,11 @@ Second task for a course about distributed systems and cloud systems
 
 Toteutetaan kaikki mallikoodin TODO-kohdat, ne on todella hyvin selitetty kommenteissa.
 
-1. Tehdään erillisessä säikeessä 'getMap' HTTP GET -kysely joka fetsaa XML muodossa karttatietoja
-2. Parsitaan saadut karttatiedot ja piirretään niillä kuva `imageLabel.setIcon(new ImageIcon(url));`
+1. Tehdään erillisessä säikeessä 'getFeatures' HTTP GET -kysely joka fetsaa XML muodossa karttatietoja
+2. Parsitaan saadut karttatiedot ja Asetetaan niiden perusteella mahdolliset checkboxit käyttöliittymään
 3. Toteutetaan nappulat muuttamaan getMap kyselyn parametreja niin että kuva liikkuu, zoomaa sisään ulos yms
-4. Muita UI muutoksia jos mieli tekee / koetaan tarpeellisiksi
+4. Lähetetään getMap HTTP GET -kysely käyttäjän syöttämillä parametreilla, joka palauttaa kuvan joka vain näytetään käyttöliittymässä `imageLabel.setIcon(new ImageIcon(url));`
+5. Muita UI muutoksia jos mieli tekee / koetaan tarpeellisiksi
 
 ### 2. Python / Scala / muu korkean tason kieli vaihtoehto (Vaikeahko)
 
