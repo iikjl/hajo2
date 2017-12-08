@@ -28,6 +28,7 @@ Ja mulla tosiaan on aika hyvä JS ja React osaaminen mut teistä en tiiä :D.
 
 EDIT: onkohan tä liian raskas prokkis olemaan kaikki frontendissä? Mallikoodi ainakin sanoo että kartan päivitys tulisi tehdä omassa säikeessä. Oman Backendin tekeminen joka parsii XML:n voisi toisaalta olla ihan siisti homma.
 
+Edit mun mielestä ois aika siistii toteuttaa sellanen backendi - I
 -------------------------
 
 Tähän voitte lisäillä omiakin näkemyksiä jos kiinnostaa -Konsta
