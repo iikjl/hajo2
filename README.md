@@ -25,6 +25,8 @@ Sama homma kuin vaihtoehdossa 2. Koko koodi toteutettava uudelleen web tekniikoi
 Eniten työtä mutta oikeasti hyödyllisin ja paras lopputulos. 
 Ja mulla tosiaan on aika hyvä JS ja React osaaminen mut teistä en tiiä :D.
 
+EDIT: onkohan tä liian raskas prokkis olemaan kaikki frontendissä? Mallikoodi ainakin sanoo että kartan päivitys tulisi tehdä omassa säikeessä. Oman Backendin tekeminen joka parsii XML:n voisi toisaalta olla ihan siisti homma.
+
 -------------------------
 
 Tähän voitte lisäillä omiakin näkemyksiä jos kiinnostaa -Konsta
