@@ -32,7 +32,8 @@ Edit mun mielestä ois aika siistii toteuttaa sellanen backendi - I
 
 EDITEDIT: Ei tä tarvii bäkkiä, ton HTTP GET kutsun siirtäminen toiseen säikeeeseen
 perustuu mun mielestä vaan siihen ettei sovellus jumitu siksi ajaksi kun palvelimella menee
-vastata HTTP pyyntöön. Tähän on super yksinkertanen ratkasu: tehdään HTTP pyyntö asynkronisesti - kuulostaa monimutkaselta mutta on oikeesti 0 markan homma. Googlaamalla esim 'async http requesst js' -> [Mozillan mielipiteitä asiasta](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Synchronous_and_Asynchronous_Requests).
+vastata HTTP pyyntöön. Tähän on super yksinkertanen ratkasu: tehdään HTTP pyyntö asynkronisesti - kuulostaa monimutkaselta mutta on oikeesti 0 markan homma. Googlaamalla esim 'async http requesst js' -> [Mozillan mielipiteitä asiasta](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Synchronous_and_Asynchronous_Requests). -K
+
 -------------------------
 
 Tähän voitte lisäillä omiakin näkemyksiä jos kiinnostaa -Konsta
