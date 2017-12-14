@@ -8,6 +8,12 @@ import java.net.URL;
 
 public class MapDialog extends JFrame {
 
+    // Karttakuvan sijainti
+
+    private int x = 0;
+    private int y = 0;
+    private int zoom = 90;
+
     // Käyttöliittymän komponentit
 
     private JLabel imageLabel = new JLabel();
@@ -72,6 +78,12 @@ public class MapDialog extends JFrame {
     public static void main(String[] args) throws Exception {
         new MapDialog();
     }
+
+
+    /** lähetä getCapabilities pyyntö palvelimelle ja parsi XML:stä layerit
+    public String[] getCapabilities(){}
+
+    */
 
     // Tarkastetaan mitkä karttakerrokset on valittu,
     // tehdään uudesta karttakuvasta pyyntä palvelimelle ja päivitetään kuva
