@@ -4,12 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class MapDialog extends JFrame {
 
     private String SERVER_ADDRESS = "http://demo.mapserver.org/cgi-bin/wms?SERVICE=WMS&VERSION=1.1.1";
     private String SRS = "EPSG:4326";
+
+    // Kuvan resoluutio ja formaatti
+
+    private int WIDTH = 953;
+    private int HEIGHT = 480;
+    private String IMAGE_FORMAT = "image/png";
+    private boolean TRANSPARENCY = true;
 
     // Karttakuvan sijainti
 
@@ -39,7 +47,10 @@ public class MapDialog extends JFrame {
 
         // ALLA OLEVAN TESTIRIVIN VOI KORVATA JOLLAKIN MUULLA ERI ALOITUSNäKYMäN
         // LATAAVALLA RIVILLä
-        imageLabel.setIcon(new ImageIcon(new URL("http://demo.mapserver.org/cgi-bin/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=-180,-90,180,90&SRS=EPSG:4326&WIDTH=953&HEIGHT=480&LAYERS=bluemarble,cities&STYLES=&FORMAT=image/png&TRANSPARENT=true")));
+        //imageLabel.setIcon(new ImageIcon(new URL("http://demo.mapserver.org/cgi-bin/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=-180,-90,180,90&SRS=EPSG:4326&WIDTH=953&HEIGHT=480&LAYERS=bluemarble,cities&STYLES=&FORMAT=image/png&TRANSPARENT=true")));
+
+        // haetaan aloitusnäkymä vähemmän vammasesti
+        new Konstan_Java_Luoka("bluemarble").run(); // piti laittaa jotain layereihin niin kovakoodasin bluemarble ":D"
 
         add(imageLabel, BorderLayout.EAST);
 
@@ -83,10 +94,10 @@ public class MapDialog extends JFrame {
     }
 
 
-    /** lähetä getCapabilities pyyntö palvelimelle ja parsi XML:stä layerit
-    public String[] getCapabilities(server){}
-
-    */
+    /**
+     * lähetä getCapabilities pyyntö palvelimelle ja parsi XML:stä layerit
+     * public String[] getCapabilities(server){}
+     */
 
     // Tarkastetaan mitkä karttakerrokset on valittu,
     // tehdään uudesta karttakuvasta pyyntä palvelimelle ja päivitetään kuva
@@ -115,7 +126,8 @@ public class MapDialog extends JFrame {
     // KAIKKIEN NAPPIEN YHTEYDESSä VOINEE HYöDYNTää updateImage()-METODIA
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == refreshB) { x - 2*zoom;
+            if (e.getSource() == refreshB) {
+                //x - 2 * zoom;
                 //try { updateImage(); } catch(Exception ex) { ex.printStackTrace(); }
             }
             if (e.getSource() == leftB) {
@@ -162,6 +174,38 @@ public class MapDialog extends JFrame {
 
         public String getName() {
             return name;
+        }
+    }
+
+    private class Konstan_Java_Luoka extends Thread {
+        private String layers;
+
+        public Konstan_Java_Luoka(String s) {
+            this.layers = s;
+        }
+
+        public void run() {
+            int x1 = x - 2 * zoom,
+                y1 = y - zoom,
+                x2 = x + 2 * zoom,
+                y2 = y + zoom;
+
+            String url = SERVER_ADDRESS
+                    + "&REQUEST=GetMap"
+                    + String.format("&BBOX=%d,%d,%d,%d", x1, y1, x2, y2)
+                    + "&SRS=" + SRS
+                    + "&WIDTH=" + WIDTH
+                    + "&HEIGHT=" + HEIGHT
+                    + "&LAYERS=" + layers
+                    + "&STYLES="
+                    + "&FORMAT=" + IMAGE_FORMAT
+                    + "&TRANSPARENT=" + TRANSPARENCY;
+
+            try {
+                imageLabel.setIcon(new ImageIcon(new URL(url)));
+            } catch (MalformedURLException m) {
+                m.printStackTrace();
+            }
         }
     }
 
