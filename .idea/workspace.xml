@@ -17,11 +17,11 @@
       <file leaf-file-name="MapDialog.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MapDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-234">
-              <caret line="66" column="29" lean-forward="true" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
+            <state relative-caret-position="342">
+              <caret line="110" column="69" lean-forward="false" selection-start-line="110" selection-start-column="69" selection-end-line="110" selection-end-column="69" />
               <folding>
-                <element signature="e#5727#5728#0" expanded="true" />
-                <element signature="e#5762#5763#0" expanded="true" />
+                <element signature="e#6042#6043#0" expanded="true" />
+                <element signature="e#6077#6078#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -258,11 +258,11 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/MapDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-234">
-          <caret line="66" column="29" lean-forward="true" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
+        <state relative-caret-position="342">
+          <caret line="110" column="69" lean-forward="false" selection-start-line="110" selection-start-column="69" selection-end-line="110" selection-end-column="69" />
           <folding>
-            <element signature="e#5727#5728#0" expanded="true" />
-            <element signature="e#5762#5763#0" expanded="true" />
+            <element signature="e#6042#6043#0" expanded="true" />
+            <element signature="e#6077#6078#0" expanded="true" />
           </folding>
         </state>
       </provider>

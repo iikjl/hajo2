@@ -8,6 +8,9 @@ import java.net.URL;
 
 public class MapDialog extends JFrame {
 
+    private String SERVER_ADDRESS = "http://demo.mapserver.org/cgi-bin/wms?SERVICE=WMS&VERSION=1.1.1";
+    private String SRS = "EPSG:4326";
+
     // Karttakuvan sijainti
 
     private int x = 0;
@@ -81,7 +84,7 @@ public class MapDialog extends JFrame {
 
 
     /** lähetä getCapabilities pyyntö palvelimelle ja parsi XML:stä layerit
-    public String[] getCapabilities(){}
+    public String[] getCapabilities(server){}
 
     */
 
@@ -103,13 +106,16 @@ public class MapDialog extends JFrame {
         // TODO:
         // getMap-KYSELYN URL-OSOITTEEN MUODOSTAMINEN JA KUVAN PäIVITYS ERILLISESSä SäIKEESSä
         // imageLabel.setIcon(new ImageIcon(url));
+
+        // Toteutetaank tä tällai: ToinenThread.run(imageLabel, server, x, y, zoom)
+        // Tai sit sisäluokkana nii ei tarte parametriviittauksii? -K
     }
 
     // Kontrollinappien kuuntelija
     // KAIKKIEN NAPPIEN YHTEYDESSä VOINEE HYöDYNTää updateImage()-METODIA
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == refreshB) {
+            if (e.getSource() == refreshB) { x - 2*zoom;
                 //try { updateImage(); } catch(Exception ex) { ex.printStackTrace(); }
             }
             if (e.getSource() == leftB) {
