@@ -32,12 +32,14 @@ public class MapDialog extends JFrame {
     private JPanel leftPanel = new JPanel();
 
     private JButton refreshB = new JButton("Päivitä");
+    private JButton resetB = new JButton("Reset");
     private JButton leftB = new JButton("<");
     private JButton rightB = new JButton(">");
     private JButton upB = new JButton("^");
     private JButton downB = new JButton("v");
     private JButton zoomInB = new JButton("+");
     private JButton zoomOutB = new JButton("-");
+    
 
     public MapDialog() throws Exception {
 
@@ -57,12 +59,14 @@ public class MapDialog extends JFrame {
 
         ButtonListener bl = new ButtonListener();
         refreshB.addActionListener(bl);
+        resetB.addActionListener(bl);
         leftB.addActionListener(bl);
         rightB.addActionListener(bl);
         upB.addActionListener(bl);
         downB.addActionListener(bl);
         zoomInB.addActionListener(bl);
         zoomOutB.addActionListener(bl);
+        
 
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         leftPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
@@ -75,6 +79,7 @@ public class MapDialog extends JFrame {
         leftPanel.add(new LayerCheckBox("cities", "Kaupungit", false));
 
         leftPanel.add(refreshB);
+        leftPanel.add(resetB);
         leftPanel.add(Box.createVerticalStrut(20));
         leftPanel.add(leftB);
         leftPanel.add(rightB);
@@ -125,52 +130,43 @@ public class MapDialog extends JFrame {
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == refreshB) {
-                updateImage();
-            }
-            else if (e.getSource() == leftB) {
+                // :DD
+            } else if (e.getSource() == leftB) {
                 // TODO:
                 // VASEMMALLE SIIRTYMINEN KARTALLA
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
-                x = x - offset;
-                updateImage();
-            }
-            else if (e.getSource() == rightB) {
+                x = x - offset;     
+            } else if (e.getSource() == rightB) {
                 // TODO:
                 // OIKEALLE SIIRTYMINEN KARTALLA
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
                 x = x + offset;
-                updateImage();
-
-            }
-            else if (e.getSource() == upB) {
+            } else if (e.getSource() == upB) {
                 // TODO:
                 // YLäSPäIN SIIRTYMINEN KARTALLA
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
-                y = y + offset;
-                updateImage();
-            }
-            else if (e.getSource() == downB) {
+                y = y + offset;   
+            } else if (e.getSource() == downB) {
                 // TODO:
                 // ALASPäIN SIIRTYMINEN KARTALLA
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
-                y = y - offset;
-                updateImage();
-            }
-            else if (e.getSource() == zoomInB) {
+                y = y - offset; 
+            } else if (e.getSource() == zoomInB) {
                 // TODO:
                 // ZOOM IN -TOIMINTO
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
-                zoom = new Double(zoom*0.75).intValue();
-                updateImage();
-            }
-            else if (e.getSource() == zoomOutB) {
+                zoom = new Double(zoom*0.75).intValue();   
+            } else if (e.getSource() == zoomOutB) {
                 // TODO:
                 // ZOOM OUT -TOIMINTO
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
                 zoom = new Double(zoom*1.25).intValue();
-                updateImage();
-            }
-        }
+            } else if (e.getSource() == resetB) {
+                x = 0;
+                y = 0;
+                zoom = 90;
+            } updateImage();
+        }  
     }
 
     // Valintalaatikko, joka muistaa karttakerroksen nimen
