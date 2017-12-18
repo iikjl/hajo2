@@ -130,32 +130,26 @@ public class MapDialog extends JFrame {
             if (e.getSource() == refreshB) {
                 // :DD
             } else if (e.getSource() == leftB) {
-                // TODO:
                 // VASEMMALLE SIIRTYMINEN KARTALLA
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
                 x = x - offset;     
             } else if (e.getSource() == rightB) {
-                // TODO:
                 // OIKEALLE SIIRTYMINEN KARTALLA
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
                 x = x + offset;
             } else if (e.getSource() == upB) {
-                // TODO:
                 // YLäSPäIN SIIRTYMINEN KARTALLA
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
                 y = y + offset;   
             } else if (e.getSource() == downB) {
-                // TODO:
                 // ALASPäIN SIIRTYMINEN KARTALLA
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
                 y = y - offset; 
             } else if (e.getSource() == zoomInB) {
-                // TODO:
                 // ZOOM IN -TOIMINTO
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
                 zoom = new Double(zoom*0.75).intValue();   
             } else if (e.getSource() == zoomOutB) {
-                // TODO:
                 // ZOOM OUT -TOIMINTO
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
                 zoom = new Double(zoom*1.25).intValue();
