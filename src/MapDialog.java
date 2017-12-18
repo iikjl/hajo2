@@ -119,10 +119,8 @@ public class MapDialog extends JFrame {
                 if (((LayerCheckBox) com).isSelected()) s = s + com.getName() + ",";
         }
         if (s.endsWith(",")) s = s.substring(0, s.length() - 1);
-       
-            new Konstan_Java_Luoka(s).run();
-           
-        }
+        new Konstan_Java_Luoka(s).run();
+    }
         
 
     // Kontrollinappien kuuntelija
