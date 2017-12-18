@@ -114,12 +114,7 @@ public class MapDialog extends JFrame {
         }
         if (s.endsWith(",")) s = s.substring(0, s.length() - 1);
 
-        // TODO:
-        // getMap-KYSELYN URL-OSOITTEEN MUODOSTAMINEN JA KUVAN PäIVITYS ERILLISESSä SäIKEESSä
-        // imageLabel.setIcon(new ImageIcon(url));
-
-        // Toteutetaank tä tällai: ToinenThread.run(imageLabel, server, x, y, zoom)
-        // Tai sit sisäluokkana nii ei tarte parametriviittauksii? -K
+        new Konstan_Java_Luoka(s).run();
     }
 
     // Kontrollinappien kuuntelija
@@ -127,8 +122,11 @@ public class MapDialog extends JFrame {
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == refreshB) {
-                //x - 2 * zoom;
-                //try { updateImage(); } catch(Exception ex) { ex.printStackTrace(); }
+                try { 
+                    updateImage(); 
+                } catch(Exception ex) { 
+                    ex.printStackTrace(); 
+                }
             }
             if (e.getSource() == leftB) {
                 // TODO:
