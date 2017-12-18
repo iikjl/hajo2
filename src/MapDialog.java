@@ -24,6 +24,7 @@ public class MapDialog extends JFrame {
     private int x = 0;
     private int y = 0;
     private int zoom = 90;
+    private int offset = 20;
 
     // Käyttöliittymän komponentit
 
@@ -101,9 +102,9 @@ public class MapDialog extends JFrame {
 
     // Tarkastetaan mitkä karttakerrokset on valittu,
     // tehdään uudesta karttakuvasta pyyntä palvelimelle ja päivitetään kuva
-    public void updateImage() throws Exception {
+    public void updateImage()  {
         String s = "";
-
+        
         // Tutkitaan, mitkä valintalaatikot on valittu, ja
         // kerätään s:ään pilkulla erotettu lista valittujen kerrosten
         // nimistä (käytetään haettaessa uutta kuvaa)
@@ -113,50 +114,61 @@ public class MapDialog extends JFrame {
                 if (((LayerCheckBox) com).isSelected()) s = s + com.getName() + ",";
         }
         if (s.endsWith(",")) s = s.substring(0, s.length() - 1);
-
-        new Konstan_Java_Luoka(s).run();
-    }
+       
+            new Konstan_Java_Luoka(s).run();
+           
+        }
+        
 
     // Kontrollinappien kuuntelija
     // KAIKKIEN NAPPIEN YHTEYDESSä VOINEE HYöDYNTää updateImage()-METODIA
     private class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == refreshB) {
-                try { 
-                    updateImage(); 
-                } catch(Exception ex) { 
-                    ex.printStackTrace(); 
-                }
+                updateImage();
             }
-            if (e.getSource() == leftB) {
+            else if (e.getSource() == leftB) {
                 // TODO:
                 // VASEMMALLE SIIRTYMINEN KARTALLA
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
+                x = x - offset;
+                updateImage();
             }
-            if (e.getSource() == rightB) {
+            else if (e.getSource() == rightB) {
                 // TODO:
                 // OIKEALLE SIIRTYMINEN KARTALLA
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
+                x = x + offset;
+                updateImage();
+
             }
-            if (e.getSource() == upB) {
+            else if (e.getSource() == upB) {
                 // TODO:
                 // YLäSPäIN SIIRTYMINEN KARTALLA
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
+                y = y + offset;
+                updateImage();
             }
-            if (e.getSource() == downB) {
+            else if (e.getSource() == downB) {
                 // TODO:
                 // ALASPäIN SIIRTYMINEN KARTALLA
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
+                y = y - offset;
+                updateImage();
             }
-            if (e.getSource() == zoomInB) {
+            else if (e.getSource() == zoomInB) {
                 // TODO:
                 // ZOOM IN -TOIMINTO
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
+                zoom = new Double(zoom*0.75).intValue();
+                updateImage();
             }
-            if (e.getSource() == zoomOutB) {
+            else if (e.getSource() == zoomOutB) {
                 // TODO:
                 // ZOOM OUT -TOIMINTO
                 // MUUTA KOORDINAATTEJA, HAE KARTTAKUVA PALVELIMELTA JA PäIVITä KUVA
+                zoom = new Double(zoom*1.25).intValue();
+                updateImage();
             }
         }
     }
