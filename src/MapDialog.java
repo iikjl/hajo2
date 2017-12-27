@@ -6,6 +6,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public class MapDialog extends JFrame {
 
@@ -14,7 +31,7 @@ public class MapDialog extends JFrame {
 
     // Kuvan resoluutio ja formaatti
 
-    private int WIDTH = 953;
+    private int WIDTH = 960;
     private int HEIGHT = 480;
     private String IMAGE_FORMAT = "image/png";
     private boolean TRANSPARENCY = true;
@@ -30,6 +47,8 @@ public class MapDialog extends JFrame {
 
     private JLabel imageLabel = new JLabel();
     private JPanel leftPanel = new JPanel();
+
+    private List<LayerCheckBox> checkboxes = new ArrayList<>();
 
     private JButton refreshB = new JButton("Päivitä");
     private JButton resetB = new JButton("Reset");
@@ -67,16 +86,11 @@ public class MapDialog extends JFrame {
         zoomInB.addActionListener(bl);
         zoomOutB.addActionListener(bl);
         
-
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         leftPanel.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
         leftPanel.setMaximumSize(new Dimension(100, 600));
 
-        // TODO:
-        // ALLA OLEVIEN KOLMEN TESTIRIVIN TILALLE SILMUKKA JOKA LISää KäYTTöLIITTYMääN
-        // KAIKKIEN XML-DATASTA HAETTUJEN KERROSTEN VALINTALAATIKOT MALLIN MUKAAN
-        leftPanel.add(new LayerCheckBox("bluemarble", "Maapallo", true));
-        leftPanel.add(new LayerCheckBox("cities", "Kaupungit", false));
+        addCheckBoxes();
 
         leftPanel.add(refreshB);
         leftPanel.add(resetB);
@@ -92,36 +106,63 @@ public class MapDialog extends JFrame {
 
         pack();
         setVisible(true);
-
     }
 
     public static void main(String[] args) throws Exception {
         new MapDialog();
     }
 
+    private void addCheckBoxes() {
+        String url = SERVER_ADDRESS + "&REQUEST=GetCapabilities";
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(new URL(url).openStream());
 
-    /**
-     * lähetä getCapabilities pyyntö palvelimelle ja parsi XML:stä layerit
-     * public String[] getCapabilities(server){}
-     */
+            for (String l : getLayers(doc)) {
+                LayerCheckBox b = new LayerCheckBox(l, l, false);
+                checkboxes.add(b);
+                leftPanel.add(b);
+            }
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static List<String> getLayers(Document doc) {
+        List<String> list = new ArrayList<>();
+
+        XPathFactory xpathFactory = XPathFactory.newInstance();
+        XPath xpath = xpathFactory.newXPath();
+        String query = "/WMT_MS_Capabilities/Capability/Layer/Layer/Name/text()";
+        try { 
+            XPathExpression expr = xpath.compile(query);
+            NodeList nodes = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+            // koitin käyttää forEach mut NodeList ei suostunu :(
+            for (int i=0; i<nodes.getLength(); i++) {
+                list.add(nodes.item(i).getNodeValue());
+            }
+        } catch (XPathExpressionException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
 
     // Tarkastetaan mitkä karttakerrokset on valittu,
     // tehdään uudesta karttakuvasta pyyntä palvelimelle ja päivitetään kuva
     public void updateImage()  {
-        String s = "";
-        
         // Tutkitaan, mitkä valintalaatikot on valittu, ja
         // kerätään s:ään pilkulla erotettu lista valittujen kerrosten
         // nimistä (käytetään haettaessa uutta kuvaa)
-        Component[] components = leftPanel.getComponents();
-        for (Component com : components) {
-            if (com instanceof LayerCheckBox)
-                if (((LayerCheckBox) com).isSelected()) s = s + com.getName() + ",";
-        }
-        if (s.endsWith(",")) s = s.substring(0, s.length() - 1);
+        String s = String.join(",", checkboxes.stream()
+            .filter(cb -> cb.isSelected())
+            .map(cb -> cb.getName())
+            .collect(Collectors.toList()));
+
         new Konstan_Java_Luoka(s).run();
     }
-        
+
 
     // Kontrollinappien kuuntelija
     // KAIKKIEN NAPPIEN YHTEYDESSä VOINEE HYöDYNTää updateImage()-METODIA
@@ -157,7 +198,9 @@ public class MapDialog extends JFrame {
                 x = 0;
                 y = 0;
                 zoom = 90;
-            } updateImage();
+            } 
+            
+            updateImage();
         }  
     }
 
