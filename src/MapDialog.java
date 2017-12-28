@@ -26,15 +26,15 @@ import org.xml.sax.SAXException;
 
 public class MapDialog extends JFrame {
 
-    private String SERVER_ADDRESS = "http://demo.mapserver.org/cgi-bin/wms?SERVICE=WMS&VERSION=1.1.1";
-    private String SRS = "EPSG:4326";
+    private final String SERVER_ADDRESS = "http://demo.mapserver.org/cgi-bin/wms?SERVICE=WMS&VERSION=1.1.1";
+    private final String SRS = "EPSG:4326";
 
     // Kuvan resoluutio ja formaatti
 
-    private int WIDTH = 960;
-    private int HEIGHT = 480;
-    private String IMAGE_FORMAT = "image/png";
-    private boolean TRANSPARENCY = true;
+    private final int WIDTH = 960;
+    private final int HEIGHT = 480;
+    private final String IMAGE_FORMAT = "image/png";
+    private final boolean TRANSPARENCY = true;
 
     // Karttakuvan sijainti
 
