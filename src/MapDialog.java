@@ -111,7 +111,9 @@ public class MapDialog extends JFrame {
     public static void main(String[] args) throws Exception {
         new MapDialog();
     }
-
+    /** 
+    * Hakee layerit palvelimelta ja lisää vastaavat checkboxit guihin
+    */
     private void addCheckBoxes() {
         String url = SERVER_ADDRESS + "&REQUEST=GetCapabilities";
         try {
@@ -128,7 +130,11 @@ public class MapDialog extends JFrame {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Etsii layertagit XML-filusta ja palauttaa niistä listan
+     * @param doc xml-tiedosto
+     * @return Lista xml-filusta löytyneistä layereista
+     */
     private static List<String> getLayers(Document doc) {
         List<String> list = new ArrayList<>();
 
