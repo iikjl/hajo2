@@ -58,7 +58,6 @@ public class MapDialog extends JFrame {
     private JButton downB = new JButton("v");
     private JButton zoomInB = new JButton("+");
     private JButton zoomOutB = new JButton("-");
-    
 
     public MapDialog() throws Exception {
 
@@ -111,6 +110,7 @@ public class MapDialog extends JFrame {
     public static void main(String[] args) throws Exception {
         new MapDialog();
     }
+    
     /** 
     * Hakee layerit palvelimelta ja lisää vastaavat checkboxit guihin
     */
@@ -130,6 +130,7 @@ public class MapDialog extends JFrame {
             e.printStackTrace();
         }
     }
+    
     /**
      * Etsii layertagit XML-filusta ja palauttaa niistä listan
      * @param doc xml-tiedosto
@@ -168,7 +169,6 @@ public class MapDialog extends JFrame {
 
         new Konstan_Java_Luoka(s).run();
     }
-
 
     // Kontrollinappien kuuntelija
     // KAIKKIEN NAPPIEN YHTEYDESSä VOINEE HYöDYNTää updateImage()-METODIA
@@ -224,6 +224,7 @@ public class MapDialog extends JFrame {
         }
     }
 
+    // Threadi joka hakee uuden karttakuvan palvelimelta
     private class Konstan_Java_Luoka extends Thread {
         private String layers;
 
@@ -231,6 +232,7 @@ public class MapDialog extends JFrame {
             this.layers = s;
         }
 
+        // juokse
         public void run() {
             int x1 = x - 2 * zoom,
                 y1 = y - zoom,
